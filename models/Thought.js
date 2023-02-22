@@ -1,31 +1,13 @@
 const { Schema, model } = require('mongoose');
 const dayjs = require('dayjs');
-
-const reactionSchema = new Schema(
-    {
-        reactionId: {
-            type: ObjectId,
-            default: new ObjectId()
-        },
-        reactionBody: {
-            type: String,
-            required: true,
-            maxLength: 280
-        },
-        username: {
-            type: String,
-            required: true
-        },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-            get: value => dayjs(value).format('MMM DD, YYYY [at] hh:mm a')
-        }
-    }
-);
+const reactionSchema = require('./Reaction');
 
 const thoughtSchema = new Schema(
     {
+        _id: {
+            type: Schema.Types.ObjectId,
+            default: new ObjectId()
+        },
         thoughtText: {
             type: String,
             required: true,
