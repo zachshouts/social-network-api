@@ -1,4 +1,4 @@
-const Schema = require('mongoose').Schema;
+const { Schema, Types } = require('mongoose');
 const dayjs = require('dayjs');
 
 
@@ -7,7 +7,7 @@ const reactionSchema = new Schema(
     {
         reactionId: {
             type: Schema.Types.ObjectId,
-            default: new ObjectId()
+            default: () => new Types.ObjectId()
         },
         reactionBody: {
             type: String,
@@ -23,6 +23,12 @@ const reactionSchema = new Schema(
             default: Date.now,
             get: value => dayjs(value).format('MMM DD, YYYY [at] hh:mm a')
         }
+    },
+    {
+        toJSON: {
+            getters: true
+        },
+        id: false
     }
 );
 
